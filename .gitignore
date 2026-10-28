@@ -34,3 +34,13 @@ anvil-state.json
 # Internal session + strategy notes, never published
 observations/
 SESSION-*.md
+
+# Kept local, not published: ENS's own source vendored for reading,
+# the unfinished demo frontend, agent working ledgers, internal planning.
+reference/
+app/
+progress/
+AGENTS.md
+DEMO-SCRIPT.md
+PRD.md
+ERD.md
