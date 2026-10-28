@@ -33,10 +33,9 @@ export interface ExpiryReader {
  *
  * UNDECIDED, placeholder. Nothing in this project pins a number: ERD.md 7.2
  * says "If the expiry is inside the trigger window, build the renewal," and
- * DEMO-SCRIPT.md beat 2 says "At the trigger window the status changes to
- * renewing," but neither gives seconds, and it is not among the "Open
- * decisions" STATE.md already tracks (that list only names the two
- * contract-level caps). 30 days is written here only so `decideWindow` has
+ * The demo script says "At the trigger window the status changes to
+ * renewing," but neither gives seconds, and it is not one of the two
+ * contract-level caps that were decided. 30 days is written here only so `decideWindow` has
  * a default: the same order of magnitude as the 28-day post-expiry grace
  * period, short enough that a one-year renewal still spends most of its
  * life outside the window. Confirm or replace it once D8 exists and its

@@ -377,7 +377,7 @@ proposal, and that is worth more than a shorter diff.
 **Decision**
 
 D4 decided the shape (fix the duration, cap the spend); this fills in the two
-numbers, which D4 left open and which `STATE.md`'s "Open decisions" and
+numbers, which D4 left open and which the project's open-decisions list and
 `THREAT-MODEL.md` section 8 were waiting on.
 
 - Fixed renewal duration: `31557600` seconds. Matches `RENEWAL_DURATION` in

@@ -14,7 +14,7 @@
  * take an extra `TOKEN_`.
  *
  * This writes no file of its own. `addresses.json` was removed on purpose, so
- * do not reintroduce a second address file. See STATE.md.
+ * do not reintroduce a second address file.
  */
 import { getNetwork } from "./networks.js";
 
