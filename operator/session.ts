@@ -146,7 +146,7 @@ const ERC7579_ERC1271_MODE_PREFIX = "0x0201" as Hex;
 const ENVELOPE_MODE_SAME_CHAIN_WITH_REFUND = "0x05" as Hex;
 
 /**
- * One year in seconds, AutoRenewPolicy.t.sol line 95 and DECISIONS.md D7.
+ * One year in seconds; AutoRenewPolicy.t.sol line 95.
  * A POLICY number, not a protocol one: `MIN_RENEW_DURATION` is 1 second on
  * both the registrar and the renewer, so nothing on chain bounds this.
  */

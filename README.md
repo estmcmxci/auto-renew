@@ -62,12 +62,15 @@ both the DAO-held approval role and a transaction from the owner.
     operator/       session payload construction, submission, fallback, log
     operator/vectors/  golden vector emitted by a Foundry test
     scripts/        regenerate the vector, reproduce the size measurements
-    DECISIONS.md    D1-D11, each with its evidence
     THREAT-MODEL.md blast radius, filled from test results
 
-The documents below cite `progress/` and `reference/` in places. Those are the
-working ledgers and a vendored copy of ENS source, kept out of this repo; the
-citations are left in because they record where a finding came from.
+Comments here cite documents that are not in this repo: `DECISIONS.md`,
+`VERIFY.md`, `STATE.md`, `AGENTS.md`, `ERD.md`, the demo script, the working
+ledgers under `progress/`, and a vendored copy of ENS source under
+`reference/`. They are the project's internal records, kept out of a repo
+meant for review. The citations stay because each one says where a finding
+came from, and a pointer with no document is still better than a claim with
+no source.
 
 ## Verify it yourself
 

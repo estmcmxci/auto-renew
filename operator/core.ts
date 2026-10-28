@@ -1,4 +1,4 @@
-// Shared operator logic. DECISIONS.md D3: write this once, give each runtime
+// Shared operator logic. Written once, with each runtime
 // (operator/node.ts for the local fork, operator/worker.ts for Sepolia) a
 // thin entry point. Nothing here holds an RPC client, a key, or a clock —
 // those are each entry point's job.

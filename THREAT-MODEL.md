@@ -52,7 +52,6 @@ State both. They are not the same number.
 - The PERIOD bound is the owner's remaining ERC-20 allowance. It is not in
   this contract. The token contract holds it and decrements it on every
   transfer, so it bounds the total without any accounting in the validator.
-  See `DECISIONS.md` D6.
 
 Do not quote the per-call cap as the blast radius. A stolen key can make more
 than one call. The allowance is what ends it.
@@ -98,10 +97,9 @@ ownership alone — the account cannot hold the name at all, by construction.
 reverting `NoNFTAllowed`. `ETHRegistry`'s registration path invokes that
 hook on whatever address it mints to. Measured, not reasoned: registering a
 real Sepolia name directly to an HCA account reverted with that selector;
-registering the same name to the account's owner EOA succeeded. See
-`DECISIONS.md` D10 and `progress/evidence.md` E6.5 for the transactions.
+registering the same name to the account's owner EOA succeeded.
 
-So the owner/caller split this design relies on (`DECISIONS.md` D6, D8) is
+So the owner/caller split this design relies on is
 not a policy choice that a future change could loosen. It is a property of
 the account contract itself. An attacker who fully compromises the session
 key still cannot make the HCA the registry-owner of anything, even if every
@@ -153,6 +151,5 @@ List what remains. Do not round it down.
       and ledger C2 is closed. Box was left unchecked by mistake.
 - [x] Confirm the grace period figure. Read on chain 2026-10-22, identical on
       both networks: registrar 2,419,200s, ETHRenewerV1 7,776,001s.
-- [x] Decide the default caps and justify each number. `DECISIONS.md` D9,
-      2026-10-27: fixed renewal duration 31,557,600s; max spend 2x the live
-      `getRenewPrice` quote read at install.
+- [x] Decide the default caps and justify each number. Fixed renewal duration
+      31,557,600s; max spend 2x the live `getRenewPrice` quote read at install.

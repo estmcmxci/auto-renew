@@ -1,4 +1,4 @@
-// Node entry point for the local-fork demo. DECISIONS.md D3: a thin runtime
+// Node entry point for the local-fork demo. A thin runtime
 // wrapper around operator/core.ts. A Cloudflare Worker cannot reach
 // localhost, so this runtime exists only for the fork; operator/worker.ts
 // (D9) is the Sepolia counterpart, from the same core.

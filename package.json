@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "Shared operator core and its two runtime entry points (Node for the local fork, Cloudflare Worker for Sepolia). See DECISIONS.md D3.",
+  "description": "Shared operator core and its two runtime entry points: Node for the local fork, Cloudflare Worker for Sepolia.",
   "dependencies": {
     "viem": "2.57.10"
   },

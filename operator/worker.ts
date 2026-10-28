@@ -1,4 +1,4 @@
-// Cloudflare Worker entry point for the Sepolia leg. DECISIONS.md D3: a thin
+// Cloudflare Worker entry point for the Sepolia leg. A thin
 // runtime wrapper around core.ts, the twin of the local-fork entry point
 // (operator/node.ts, D8). Runs on a cron trigger; a Worker cannot reach
 // localhost, which is why the fork needs its own runtime instead of this one.
