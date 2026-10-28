@@ -74,9 +74,24 @@ no source.
 
 ## Verify it yourself
 
+The TypeScript side, from a fresh clone:
+
+    bun install
     bun test operator/session.vector.test.ts        # 9 pass
-    # in a contracts-v2 checkout with the branch applied:
+
+The Solidity side needs a contracts-v2 checkout with the branch applied. The
+test forks Sepolia and reads every address from the environment, so nothing is
+hardcoded in it. A keyless public endpoint is enough; no API key is needed.
+
+    set -a
+    . <(bun config/export-env.ts 11155111)          # emits 27 AR_* addresses
+    export SEPOLIA_RPC_URL=https://evm.stupidtech.net/v1/11155111
+    set +a
+    cd <contracts-v2>/contracts
     forge test --match-path 'test/unit/hca/*'       # 134 pass
+
+Both sequences were run from a clean clone of this repo before being written
+down.
 
 The vector in `operator/vectors/` is emitted by `test_emit_typescriptVector`,
 which asserts the account **accepts** the payload before printing it. So a
