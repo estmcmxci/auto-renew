@@ -64,7 +64,6 @@ both the DAO-held approval role and a transaction from the owner.
     scripts/        regenerate the vector, reproduce the size measurements
     DECISIONS.md    D1-D11, each with its evidence
     THREAT-MODEL.md blast radius, filled from test results
-    VERIFY.md       what was checked on chain, and what was not
 
 The documents below cite `progress/` and `reference/` in places. Those are the
 working ledgers and a vendored copy of ENS source, kept out of this repo; the
@@ -83,6 +82,24 @@ accepted, not merely that two encoders agree.
 
 The private keys in that vector are Foundry `makeAddrAndKey` derivations and
 control nothing. See `operator/vectors/README.md`.
+
+## The fallback half
+
+Writing a fallback address needs no contract change. `setAddress` is already
+permitted by `HCAResolverPolicyLib`, so a session can call it — under two
+conditions, both measured on Sepolia rather than read off the docs:
+
+- the session's proof must NAME the resolver. The renew proof sets
+  `resolver = address(0)` on purpose, since a renewal touches no resolver, so a
+  `setAddress` under that session is refused. Measured against the live
+  validator: `0xffffffff` for the renew-shaped session, the ERC-1271 magic
+  value for one that names a conforming resolver.
+- `checkBinding` requires that resolver to be a `VerifiableFactory` proxy of
+  `PERMITTED_RESOLVER_IMPL`. The shared `ENSV2Resolver` is refused. The demo
+  name had no resolver at all, so a conforming one had to be deployed and set
+  before the fallback could run.
+
+Renewal is the only half with no path.
 
 ## Status
 

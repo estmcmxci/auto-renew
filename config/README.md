@@ -26,7 +26,7 @@ came from is a defect. Move it here.
 
 | Variable | Use | Why |
 | --- | --- | --- |
-| `*_READ_RPC_URL` | preflight, VERIFY checks, expiry polling, ad-hoc `cast` | Keyless. `evm.stupidtech.net` races five public providers per request. |
+| `*_READ_RPC_URL` | preflight, on-chain checks, expiry polling, ad-hoc `cast` | Keyless. `evm.stupidtech.net` races five public providers per request. |
 | `*_RPC_URL` | `anvil --fork-url`, the Foundry test matrix | Needs a dedicated key. |
 
 Do not point a fork at the read path. It is limited to 60 requests per 10
@@ -71,7 +71,7 @@ Mainnet expectations are recorded, read on chain 2026-10-22: registrar grace
 DAI and rejects WETH and USDT.
 
 **Sepolia expectations are null.** They have not been read. Fill them before
-the first Sepolia run, and record the evidence in `../VERIFY.md`.
+the first Sepolia run, and record the evidence alongside the run.
 
 `needsVerification()` returns true for any network in that state.
 

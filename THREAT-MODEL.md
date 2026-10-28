@@ -151,9 +151,8 @@ List what remains. Do not round it down.
 
 - [x] Fill section 3 from test results. Done 2026-10-22; section 3 says so
       and ledger C2 is closed. Box was left unchecked by mistake.
-- [x] Confirm the grace period figure. `VERIFY.md` item 2 is DONE for both
-      networks, 2026-10-22, citing registrar 2,419,200s and ETHRenewerV1
-      7,776,001s. Box was left unchecked by mistake.
+- [x] Confirm the grace period figure. Read on chain 2026-10-22, identical on
+      both networks: registrar 2,419,200s, ETHRenewerV1 7,776,001s.
 - [x] Decide the default caps and justify each number. `DECISIONS.md` D9,
       2026-10-27: fixed renewal duration 31,557,600s; max spend 2x the live
       `getRenewPrice` quote read at install.

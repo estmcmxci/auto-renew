@@ -5,130 +5,6 @@ consequence. Do not re-open one without adding a new record.
 
 ---
 
-## D1. How far Rhinestone goes
-
-**Date:** 2026-10-22
-**Status:** DECIDED
-
-**Decision**
-
-- Use Nexus and the ERC-7579 validator modules. This is not a choice.
-- Use `rhinestonewtf/mockestrator` for the demo, locally.
-- Trigger the renewal with our own keeper.
-- Cite `ScheduledOrders` and `DeadmanSwitch` as design precedent only.
-
-**Reason**
-
-The HCA is a Nexus account and `HCAOwnerAndSessionValidator` is an ERC-7579
-validator. The stack is already Rhinestone.
-
-`mockestrator` is open source and runs locally, so the demo takes no live
-dependency and repeats on command.
-
-Rhinestone's automation cannot replace the keeper, for two reasons:
-
-1. The module catalog has no generic scheduler for an arbitrary call.
-   `ScheduledOrders` executes swaps. `ScheduledTransfers` executes token
-   transfers. Neither calls a registrar.
-2. `executeOrder` is account-gated. `ScheduledTransfers.sol` reads
-   `executionLog[msg.sender][jobId]`, so the caller is the account. A third
-   party that calls it finds an empty config and fails `canExecute`. Their
-   automation therefore submits a user operation from the account, and that
-   operation passes through the validator like any other.
-
-Point 2 confirms the request rather than removing it. No automation reaches
-`renew` until the session policy permits it.
-
-**Evidence**
-
-- `rhinestonewtf/core-modules`, `src/` listing: AutoSavings, ColdStorageHook,
-  DeadmanSwitch, Flashloan, HookMultiPlexer, MultiFactor, OwnableExecutor,
-  OwnableValidator, RegistryHook, ScheduledOrders, ScheduledTransfers,
-  SocialRecovery, WebAuthnValidator.
-- `src/ScheduledTransfers/ScheduledTransfers.sol`, `executeOrder`.
-- Read 2026-10-22.
-
-**Consequence**
-
-The keeper is ours. The precedent is theirs.
-
-Use the precedent in the proposal as the shape, not as a service commitment:
-a schedule enforced on chain, execution triggered off chain, is normal in this
-account stack.
-
-`DeadmanSwitch` acts when an owner goes inactive. That is the fallback half of
-this product, already shipped in this stack. Cite it in `THREAT-MODEL.md` and
-in the proposal.
-
-**Closed open item**
-
-The `canExecute` modifier was read on 2026-10-22, in
-`rhinestonewtf/modulekit`, `src/module-bases/SchedulingBase.sol`. It calls
-`_isExecutionValid`, which reads `executionLog[msg.sender][jobId]` and checks
-four conditions: `isEnabled`, the interval has elapsed, the execution quota is
-not spent, and `startDate` has passed.
-
-There is no caller allowlist and no owner check. The identity gate is the
-keyed storage. A stranger reads an empty config and reverts
-`InvalidExecution`. The account-gated finding is confirmed.
-
----
-
-## D2. Frontend stack
-
-**Date:** 2026-10-22
-**Status:** DECIDED
-
-**Decision**
-
-Vite, React, wagmi and viem, with `@ensdomains/thorin`.
-
-**Reason**
-
-Thorin is the ENS design system. The left pane must read as the shipped
-feature, not as an approximation of it. An approximation invites the audience
-to judge the mock-up instead of the mechanism.
-
-Vite keeps the demo a local application with no server. The demo runs against
-`localhost:8545`.
-
-**Consequence**
-
-Pin viem at 2.35.0 or above. The ENS readiness page gives the minimum versions
-for v2 resolution: viem >= 2.35.0, ENSjs >= 4.2.3, ethers >= 6.17.0. An older
-client resolves through the wrong path and the demo reads wrong values.
-
-Note: that page was dismissed earlier in planning as irrelevant. It is
-irrelevant to the validator change and relevant to the frontend. Both are true.
-
----
-
-## D3. Operator runtime
-
-**Date:** 2026-10-22
-**Status:** DECIDED
-
-**Decision**
-
-- Local fork demo: a Node process.
-- Sepolia evidence: a Cloudflare Worker on a cron trigger.
-
-**Reason**
-
-A Cloudflare Worker cannot reach `localhost:8545`, so the fork demo needs a
-local process.
-
-The Sepolia leg must run unattended. An operator that runs on a laptop does
-not support the claim that the mechanism works without the owner.
-
-**Consequence**
-
-Write the operator logic once, as a shared TypeScript core. Give each runtime
-a thin entry point. Do not fork the logic, or the demo and the evidence will
-drift apart and one of them will be wrong on the day.
-
----
-
 ## D4. Fixed duration or capped duration
 
 **Date:** 2026-10-22
@@ -189,7 +65,7 @@ Read on 2026-10-22, in the clone of `ensdomains/contracts-v2` at
    as above. Test the unequal case in both directions.
 3. `renew` takes the payment token as a parameter, so the caller chooses it. A
    spend cap in one token does not bind a call that pays in another. The rule
-   must fix the payment token, or hold a cap for each token. `VERIFY.md` 5
+   must fix the payment token, or hold a cap for each token. the accepted-token set read on chain
    records USDC and DAI as accepted, so this is reachable, not theoretical.
    Decide it in R3.
 4. Set the exact second value in R3 and justify it in `THREAT-MODEL.md`

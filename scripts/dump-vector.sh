@@ -15,7 +15,7 @@
 # progress/contracts.md C4.
 set -euo pipefail
 
-ROOT="/Users/oakgroup/auto-renew"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OUT="$ROOT/operator/vectors/renew-t1.json"
 
 cd "$ROOT"

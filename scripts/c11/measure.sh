@@ -7,7 +7,8 @@
 # exceeds EIP-170 in this tree. That is unrelated to the validator, so the
 # exit code is ignored and success is judged on the size row being present.
 set -uo pipefail
-C=/Users/oakgroup/auto-renew/contracts-v2/contracts
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+C="$ROOT/contracts-v2/contracts"
 LABEL="$1"; VAL="$2"; LIB="$3"
 cp "$VAL" "$C/src/hca/HCAOwnerAndSessionValidator.sol"
 cp "$LIB" "$C/src/hca/libraries/HCARegistrarPolicyLib.sol"

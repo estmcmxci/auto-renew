@@ -78,7 +78,7 @@ export interface NetworkConfig {
      * PERMITTED_RESOLVER_IMPL) set on this name, with `account` granted
      * ROLE_SET_ADDRESS on it via grantSetterRoles — NOT grantRoles, which
      * PermissionedResolver disables. See progress/evidence.md E9 and
-     * VERIFY.md item 3.
+     * Measured on chain, not read from docs.
      */
     resolver?: Address;
     resolverGrantedSetAddress?: boolean;

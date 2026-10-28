@@ -5,10 +5,9 @@ import { privateKeyToAccount } from "viem/accounts";
 import {
   buildRenewSessionPayload,
   executeSinglechainOpsCalldata,
-  STANDALONE_INTENT_ABI,
   type RenewSessionInputs,
-} from "/Users/oakgroup/auto-renew/operator/session.ts";
-import { getNetwork } from "/Users/oakgroup/auto-renew/config/networks.ts";
+} from "./session.ts";
+import { getNetwork } from "../config/networks.ts";
 
 const net = getNetwork(11155111);
 const A = net.ourStack!.DemoAccount;

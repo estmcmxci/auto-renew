@@ -14,7 +14,7 @@
 // Regenerate with `scripts/dump-vector.sh` after any change to the fixture,
 // the test helpers or the validator's packing.
 //
-// Run:  cd /Users/oakgroup/auto-renew && bun test operator/session.vector.test.ts
+// Run:  bun test operator/session.vector.test.ts   (from the repo root)
 
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";

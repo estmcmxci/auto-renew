@@ -90,7 +90,7 @@ export function assertPreflight(r: PreflightResult): void {
   throw new Error(
     `Preflight failed on ${r.network} (chain ${r.chainId}):\n${failed}\n\n` +
       `The deployment changed, or config/networks.ts is stale. Re-read the ` +
-      `deployment records on post-audit-2 and update VERIFY.md. Do not edit ` +
+      `deployment records on post-audit-2 and update them here. Do not edit ` +
       `the expectations to make this pass.`,
   );
 }

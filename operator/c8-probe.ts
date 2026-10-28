@@ -1,11 +1,11 @@
 // C8 probe. Read-only. Asks the LIVE validator whether a session may call
 // setAddress, in two session shapes, and nothing else.
-import { createPublicClient, http, encodeFunctionData, encodeAbiParameters, parseAbiParameters, keccak256, toHex } from "viem";
+import { createPublicClient, http, encodeFunctionData } from "viem";
 import { sepolia } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 import {
   buildRenewSessionProof, encodeExecutions, operationHash, singleChainDigest,
-  renewEnvelope, renewGasRefund, accountSignature, signRhinestoneMessage,
+  renewEnvelope, signRhinestoneMessage,
   NO_GAS_REFUND, type RenewSessionInputs, type Execution,
 } from "./session.ts";
 import { getNetwork } from "../config/networks.ts";
@@ -58,7 +58,7 @@ async function ask(name: string, resolverInProof: `0x${string}`, executions: Exe
     refund: { token, maxExchangeRate: 5_000_000_000n, maxGasOverhead: 100_000n, maxAmount: 25_000_000n },
     sourceChain: { chainId: 84532n, sessionDigest: ("0x"+"11".repeat(32)) as `0x${string}` },
   };
-  const { proof, permissionId } = await buildRenewSessionProof(base, process.env.DEPLOYER_PRIVATE_KEY as `0x${string}`);
+  const { proof } = await buildRenewSessionProof(base, process.env.DEPLOYER_PRIVATE_KEY as `0x${string}`);
   // Override the resolver AFTER the salt is built? No - the salt must include it.
   // Rebuild by hand: set resolver first, then recompute.
   proof.resolver = resolverInProof;
@@ -90,9 +90,7 @@ async function ask(name: string, resolverInProof: `0x${string}`, executions: Exe
     console.log(`${name}: ACCEPTED ${r.data?.slice(0,10)}`);
   } catch (e:any) {
     const raw = JSON.stringify(e.cause?.data ?? e.data ?? e.details ?? "");
-    const sels: Record<string,string> = {
-      "0x8baa579f":"InvalidSigner", "0x3f7a2b1c":"?",
-    };
+
     let m = (e.shortMessage ?? e.message ?? "").split("\n")[0];
     const errName = e.cause?.data?.errorName ?? e.cause?.errorName;
     console.log(`${name}: REFUSED  error=${errName ?? m}  raw=${raw.slice(0,90)}`);
