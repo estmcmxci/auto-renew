@@ -8,13 +8,12 @@ for `renew`. `IETHRenewer.renew` carries no owner argument, so the policy's
 A session key can `commit`, `register`, `setNameWithHCA`, `claimWithHCA` and
 `deployProxy`. It cannot renew the name it was authorised for.
 
-This repository holds the evidence for a one-rule change that closes that gap,
-and the operator code built against it.
+This repository holds the evidence for a one-rule change, closing the gap with opcode. 
 
-**The contract change is not here.** It is six files on a branch:
+**The contract change is not here.** It's six files on a branch:
 <https://github.com/ensdomains/contracts-v2/compare/post-audit-2...estmcmxci:feat/hca-session-renew-rule>
 
-## It runs on mainnet-equivalent contracts, not in theory
+## It runs on mainnet-equivalent contracts, for real
 
 Everything below is on public Sepolia, against the deployed ENSv2 contracts.
 
@@ -34,7 +33,7 @@ Expiry moved `2026-11-24` → `2027-11-25` → `2028-11-24`, each time by exactl
 time, then stopped. The ERC-20 allowance **is** the period cap, and the token
 contract enforces it. No intermediate account ever holds funds.
 
-## What it costs, stated here rather than found later
+## The cost
 
 **Size.** At ENS's own compiler settings (solc 0.8.27, optimizer on,
 `runs = 23000`) the validator goes from **19,753 to 22,307 bytes**: +2,554,
@@ -52,11 +51,6 @@ ENS's own pre-existing validator test was reverted to its form at HEAD and all
 134 tests in `test/unit/hca/` still pass, including the sixteen that a
 ten-field salt broke.
 
-**One cost is ours.** The packed session proof header grows from 110 to 150
-bytes to carry the caps on the wire. The owner signs the salt, not the
-envelope, so signatures are unaffected — but any software that packs an
-envelope must emit the longer header.
-
 **Who is affected.** 2,869 HCAs exist on mainnet. Every one was created by a
 direct call to `StandaloneHCAFactory.deploy`; no contract in contracts-v2 calls
 it. This change reaches none of them unless the owner upgrades, which needs
@@ -73,7 +67,7 @@ both the DAO-held approval role and a transaction from the owner.
     THREAT-MODEL.md blast radius, filled from test results
     VERIFY.md       what was checked on chain, and what was not
 
-## Verifying it yourself
+## Verify it yourself
 
     bun test operator/session.vector.test.ts        # 9 pass
     # in a contracts-v2 checkout with the branch applied:
