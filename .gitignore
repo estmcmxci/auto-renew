@@ -30,3 +30,7 @@ anvil-state.json
 
 # Local agent tooling, not part of the work
 .claude/
+
+# Internal session + strategy notes, never published
+observations/
+SESSION-*.md

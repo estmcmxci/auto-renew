@@ -61,11 +61,14 @@ both the DAO-held approval role and a transaction from the owner.
     config/         the only address source, keyed by chain id
     operator/       session payload construction, submission, fallback, log
     operator/vectors/  golden vector emitted by a Foundry test
-    reference/      ENS source pinned at f85062d3, for reading only
-    progress/       working ledgers
+    scripts/        regenerate the vector, reproduce the size measurements
     DECISIONS.md    D1-D11, each with its evidence
     THREAT-MODEL.md blast radius, filled from test results
     VERIFY.md       what was checked on chain, and what was not
+
+The documents below cite `progress/` and `reference/` in places. Those are the
+working ledgers and a vendored copy of ENS source, kept out of this repo; the
+citations are left in because they record where a finding came from.
 
 ## Verify it yourself
 
@@ -83,5 +86,5 @@ control nothing. See `operator/vectors/README.md`.
 
 ## Status
 
-The contract rule, the operator path and the evidence are done. The demo
-frontend in `app/` is unfinished. Nothing here has been proposed to ENS yet.
+The contract rule, the operator path and the evidence are done. A demo
+frontend is not. Nothing here has been proposed to ENS yet.
