@@ -1,0 +1,81 @@
+.demo-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  align-items: start;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pane {
+  text-align: left;
+}
+
+.pane-right {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.field-list {
+  margin: 16px 0;
+}
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+
+  dt,
+  dd {
+    margin: 0;
+  }
+}
+
+.pane-right table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.pane-right th,
+.pane-right td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/*
+ * @ensdomains/thorin@1.0.0-beta.28's Checkbox (and Toggle) render with a
+ * fully transparent track and knob under this setup: verified in a real
+ * browser, both components, disabled and enabled, with and without an
+ * explicit color prop — background-color and background-image both compute
+ * to none on the underlying <input>. The package's own reset
+ * (`* { appearance: none; background: none }`) strips the native checkbox
+ * box, and the vanilla-extract "recipe" classes meant to restore a visible
+ * fill never apply when the app only imports the prebuilt dist/thorin.css,
+ * rather than running Thorin's own vanilla-extract build step. Box,
+ * Typography, Card, Heading and Tag — none of them recipe-based — all
+ * render correctly, so this is scoped to recipe-based form controls, not a
+ * CSS-loading failure.
+ * Restoring the native control here rather than leaving it invisible:
+ * `auto` brings back the browser's own checkbox box, so the control is
+ * visible and functional, not a Thorin-styled one.
+ */
+.thorin-checkbox-visible-fix {
+  appearance: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}

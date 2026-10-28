@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["operator", "config"],
+  // `bun test` runs the vector check and supplies its own `bun:test` types.
+  // They are not installed here, so `tsc` would fail on the import alone.
+  // Excluding the test files keeps `tsc --noEmit` a clean gate on the code
+  // that ships; the vector check is gated by `bun test` instead.
+  "exclude": ["**/*.test.ts"]
+}

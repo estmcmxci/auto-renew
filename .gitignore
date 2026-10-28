@@ -1,0 +1,32 @@
+# Secrets. Nothing in here, ever.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+**/keystore/
+
+# The clone. Do not vendor the repo into this directory.
+contracts-v2/
+mockestrator/
+
+# Build output
+node_modules/
+out/
+cache/
+cache_forge/
+broadcast/
+dist/
+.next/
+coverage/
+lcov.info
+.wrangler/
+
+# Local runtime
+anvil-state.json
+*.log
+.DS_Store
+
+# Local agent tooling, not part of the work
+.claude/

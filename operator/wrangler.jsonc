@@ -1,0 +1,25 @@
+{
+  "$schema": "./../node_modules/wrangler/config-schema.json",
+  "name": "auto-renew-operator-sepolia",
+  "main": "worker.ts",
+  "compatibility_date": "2025-11-05",
+
+  "triggers": {
+    // PLACEHOLDER. No document in this project pins a poll cadence for the
+    // Sepolia leg — the same gap DEFAULT_TRIGGER_WINDOW_SECONDS in core.ts
+    // flags for the trigger window itself. Every 15 minutes is written here
+    // only so this config has a value; confirm or replace it before relying
+    // on it, same spirit as core.ts's comment.
+    "crons": ["*/15 * * * *"]
+  },
+
+  "vars": {
+    // Keyless, not a secret (config/README.md's READ path). If this ever
+    // needs SEPOLIA_RPC_URL (the dedicated, keyed endpoint) instead, that
+    // value must move to a Worker secret (`wrangler secret put`), never here.
+    "SEPOLIA_READ_RPC_URL": "https://evm.stupidtech.net/v1/11155111",
+    // Same placeholder-for-exercising-the-code value as .env's WATCHED_LABELS
+    // (progress/demo.md D8) — not a decided demo name (D4).
+    "WATCHED_LABELS": "estmcmxci"
+  }
+}
